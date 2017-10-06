@@ -39,7 +39,7 @@ GridSnap.prototype.getNearestVertexFromEvent = function(event) {
 	mouse.set( ( mouse.x * 2 ) - 1, - ( mouse.y * 2 ) + 1 );
 
 	this.raycaster.setFromCamera(mouse, this.camera);
-	var intersects = this.raycaster.intersectObject(this.intersectMesh, true);
+	var intersects = this.raycaster.intersectOctreeObject(this.intersectMesh, true);
 
 	if (intersects.length > 0) {
 		var nearestPoint = intersects[0].point;
