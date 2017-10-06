@@ -14,7 +14,7 @@ var sphere = new THREE.Mesh(
 	new THREE.SphereGeometry(10.0, 32, 32),
 	new THREE.MeshPhongMaterial({ color: 0x000000, wireframe: true })
 )
-sphere.position.set(0, 0, -20);
+sphere.position.set(0, 0, -10);
 scene.add(sphere);
 
 const pointLight = new THREE.PointLight(0xFFFFFF);
