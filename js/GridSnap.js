@@ -1,4 +1,4 @@
-function SnapToGrid(scene, renderer, camera, mesh, radius, hoverMesh, markerMesh) {
+function GridSnap(scene, renderer, camera, mesh, radius, hoverMesh, markerMesh) {
 	this.markerMeshes = {}; // Store objects added by clicks
 	this.intersectMesh = mesh;
 	this.enabled = true;
@@ -28,7 +28,7 @@ function SnapToGrid(scene, renderer, camera, mesh, radius, hoverMesh, markerMesh
 	}
 }
 
-SnapToGrid.prototype.getNearestVertexFromEvent = function(event) {
+GridSnap.prototype.getNearestVertexFromEvent = function(event) {
 	var mouse = new THREE.Vector2();
 	// Get bounding rect for our DOM element
 	var rect = this.renderer.domElement.getBoundingClientRect();
@@ -48,7 +48,7 @@ SnapToGrid.prototype.getNearestVertexFromEvent = function(event) {
 	return null;
 }
 
-SnapToGrid.prototype.addOrRemoveMarker = function(vertex) {
+GridSnap.prototype.addOrRemoveMarker = function(vertex) {
 	var hash = objectHash(vertex);
 	if (this.markerMeshes[hash]) {
 		// We already have added this and clicked again. Remove it
@@ -70,7 +70,7 @@ SnapToGrid.prototype.addOrRemoveMarker = function(vertex) {
 	this.scene.add(markerMesh);
 }
 
-SnapToGrid.prototype.mouseUp = function(event) {
+GridSnap.prototype.mouseUp = function(event) {
 	if(!this.addMarkerOnMouseUp) return;
 
 	let nearestVertex = this.getNearestVertexFromEvent(event);
@@ -80,15 +80,15 @@ SnapToGrid.prototype.mouseUp = function(event) {
 	this.addMarkerOnMouseUp = false;
 }
 
-SnapToGrid.prototype.mouseDown = function(event) {
+GridSnap.prototype.mouseDown = function(event) {
 	this.addMarkerOnMouseUp = true
 }
 
-SnapToGrid.prototype.mouseMoved = function(event) {
+GridSnap.prototype.mouseMove = function(event) {
 	// If we're moving while pressed, we are probably rotating camera. 
 	// Skip adding markers.
 	// TODO: it could make sense to add multiple markers this way, support this?
-	
+
 	this.addMarkerOnMouseUp = false;
 	// Skip if not enabled or we haven't specified a markerMesh
 	if (!this.enabled || !this.hoverMesh) return;
