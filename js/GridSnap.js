@@ -14,6 +14,7 @@ function GridSnap(scene, renderer, camera, mesh, radius, hoverMesh, markerMesh) 
 	if (this.hoverMesh) {
 		scene.add(this.hoverMesh); // Since clickMeshes are not adde by default, this shouldn't be either
 		this.hoverMesh.renderOrder = 999; // hoverMesh will render above marker objects. TODO: improve this so it doesn't render above all objects in scene
+		this.hoverMesh.visible = false
 	}
 	
 	this.octree = new THREE.Octree({
